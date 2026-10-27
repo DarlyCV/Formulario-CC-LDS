@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <meta name="theme-color" content="#1E3A5F" />
+  <title>Registro SED – Luz Del Sur</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+
+<!-- ── HEADER ── -->
+<header>
+  <div class="header-inner">
+    <div class="logo-text">
+      <div class="brand">LUZ DEL SUR</div>
+      <div class="sub">Registro de SED</div>
+    </div>
+    <div class="clock-box">
+      <div id="hdr-date"></div>
+      <div id="hdr-time">--:--:--</div>
+    </div>
+  </div>
+  <div class="accent-bar"></div>
+</header>
+
+<!-- ── CONTENIDO ── -->
+<div class="scroll-area">
+
+  <!-- CARD: Identificación -->
+  <div class="card">
+    <div class="card-title">Identificación</div>
+
+    <div class="field">
+      <label class="req" for="sed-input">SED</label>
+      <div class="sed-wrap">
+        <input
+          type="text"
+          id="sed-input"
+          placeholder="Buscar SED (ej: 01225S)…"
+          autocomplete="off"
+          autocorrect="off"
+          autocapitalize="characters"
+          spellcheck="false"
+        />
+        <button class="sed-clear" id="sed-clear" onclick="clearSed()">✕</button>
+        <div id="sed-drop"></div>
+      </div>
+    </div>
+
+    <div class="row2" style="margin-top: 12px;">
+      <div class="field">
+        <label for="alim-in">Alim.</label>
+        <input type="text" id="alim-in" class="fi" readonly placeholder="Auto" />
+      </div>
+      <div class="field">
+        <label class="req" for="celda-in">Celda</label>
+        <input type="text" id="celda-in" class="fi" placeholder="Ej: C-01" />
+      </div>
+    </div>
+  </div>
+
+  <!-- CARD: Datos Técnicos -->
+  <div class="card">
+    <div class="card-title">Datos Técnicos</div>
+
+    <div class="field">
+      <label class="req" for="ternas-in">Cantidad de Ternas Existentes</label>
+      <input
+        type="number"
+        id="ternas-in"
+        class="fi"
+        placeholder="0"
+        min="0"
+        inputmode="numeric"
+      />
+    </div>
+
+    <div class="field">
+      <label class="req" for="resp-in">Responsable</label>
+      <input
+        type="text"
+        id="resp-in"
+        class="fi"
+        placeholder="Nombre completo"
+        autocapitalize="words"
+        inputmode="text"
+      />
+    </div>
+  </div>
+
+  <!-- CARD: Comentarios -->
+  <div class="card">
+    <div class="card-title">Comentarios</div>
+    <textarea
+      id="coment-in"
+      class="fi"
+      placeholder="Observaciones adicionales…"
+    ></textarea>
+  </div>
+
+  <!-- CARD: Fotos -->
+  <div class="card">
+    <div class="card-title">Fotos</div>
+    <div class="photo-grid" id="photo-grid">
+      <label class="photo-add" for="photo-file">
+        <span class="pa-plus">+</span>
+        <span>Agregar</span>
+      </label>
+    </div>
+    <input
+      type="file"
+      id="photo-file"
+      accept="image/*"
+      multiple
+      capture="environment"
+    />
+    <p class="photo-count" id="photo-count">0 fotos adjuntadas</p>
+  </div>
+
+  <!-- Botones de acción -->
+  <button class="btn-save" onclick="guardar()">Guardar Registro</button>
+  <button class="btn-clear" onclick="limpiar()">Limpiar formulario</button>
+
+</div>
+
+<!-- ── NOTIFICACIÓN TOAST ── -->
+<div class="toast" id="toast"></div>
+
+<script src="app.js"></script>
+</body>
+</html>

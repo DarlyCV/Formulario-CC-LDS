@@ -1,0 +1,464 @@
+/* ==========================================================
+   Registro SED – Luz Del Sur
+   Estilos mobile-first
+   ========================================================== */
+
+/* ── Variables de color (paleta Luz Del Sur) ── */
+:root {
+  --orange:    #F47920;
+  --yellow:    #FFC20E;
+  --blue:      #1E3A5F;
+  --dark:      #1A1A2E;
+  --gray-d:    #374151;
+  --gray-m:    #6B7280;
+  --gray-l:    #F1F5F9;
+  --gray-b:    #E5E7EB;
+  --white:     #FFFFFF;
+  --orange-lt: #FFF3E8;
+  --green:     #16A34A;
+  --red:       #DC2626;
+}
+
+/* ── Reset y base ── */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  -webkit-tap-highlight-color: transparent;
+}
+
+html, body {
+  width: 100%;
+  max-width: 100vw;
+  overflow-x: hidden;
+  font-family: -apple-system, 'Segoe UI', Roboto, Arial, sans-serif;
+  font-size: 16px;
+  background: var(--gray-l);
+  color: var(--dark);
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  padding-bottom: env(safe-area-inset-bottom, 24px);
+}
+
+/* ── Scrollbar ── */
+::-webkit-scrollbar { width: 3px; }
+::-webkit-scrollbar-thumb { background: var(--orange); border-radius: 2px; }
+
+/* ==========================================================
+   HEADER
+   ========================================================== */
+header {
+  position: sticky;
+  top: 0;
+  z-index: 200;
+  background: linear-gradient(135deg, var(--blue) 0%, #0F2540 100%);
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.35);
+  padding-top: env(safe-area-inset-top, 0px);
+}
+
+.header-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 16px 8px;
+  min-height: 56px;
+}
+
+.logo-text .brand {
+  font-size: 16px;
+  font-weight: 800;
+  color: var(--yellow);
+  letter-spacing: 0.4px;
+}
+
+.logo-text .sub {
+  font-size: 12px;
+  color: #94A3B8;
+  margin-top: 2px;
+}
+
+.clock-box { text-align: right; }
+
+#hdr-date {
+  font-size: 11px;
+  color: #94A3B8;
+}
+
+#hdr-time {
+  font-size: 22px;
+  font-weight: 800;
+  color: var(--yellow);
+  font-variant-numeric: tabular-nums;
+}
+
+.accent-bar {
+  height: 3px;
+  background: linear-gradient(90deg, var(--orange), var(--yellow), var(--orange));
+}
+
+/* ==========================================================
+   CONTENEDOR PRINCIPAL
+   ========================================================== */
+.scroll-area {
+  width: 100%;
+  max-width: 480px;
+  margin: 0 auto;
+  padding: 14px 14px 32px;
+}
+
+/* ==========================================================
+   TARJETAS (CARDS)
+   ========================================================== */
+.card {
+  background: var(--white);
+  border-radius: 16px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.07);
+  padding: 16px 14px;
+  margin-bottom: 12px;
+}
+
+.card-title {
+  font-size: 11px;
+  font-weight: 800;
+  color: var(--orange);
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+  margin-bottom: 14px;
+  padding-bottom: 10px;
+  border-bottom: 2px solid var(--orange-lt);
+}
+
+/* ==========================================================
+   CAMPOS DE FORMULARIO
+   ========================================================== */
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.field + .field {
+  margin-top: 12px;
+}
+
+label {
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--gray-d);
+  text-transform: uppercase;
+  letter-spacing: 0.4px;
+}
+
+/* Indicador de campo obligatorio */
+.req::after {
+  content: ' *';
+  color: var(--orange);
+}
+
+/* Inputs y textarea base */
+.fi,
+textarea.fi {
+  width: 100%;
+  min-height: 48px;
+  padding: 13px 14px;
+  border: 2px solid var(--gray-b);
+  border-radius: 12px;
+  font-size: 16px; /* Mínimo 16px para evitar zoom en iOS */
+  font-family: inherit;
+  color: var(--dark);
+  background: var(--white);
+  outline: none;
+  transition: border-color 0.2s, box-shadow 0.2s;
+  -webkit-appearance: none;
+  touch-action: manipulation;
+}
+
+.fi:focus {
+  border-color: var(--orange);
+  box-shadow: 0 0 0 3px rgba(244, 121, 32, 0.12);
+}
+
+.fi[readonly] {
+  background: #F9FAFB;
+  color: var(--gray-m);
+  cursor: not-allowed;
+}
+
+/* Estado activo cuando se selecciona un SED */
+.fi.alim-ok {
+  background: var(--orange-lt);
+  color: var(--orange);
+  font-weight: 800;
+  border-color: var(--orange);
+}
+
+textarea.fi {
+  resize: none;
+  min-height: 88px;
+}
+
+/* Grid 2 columnas para Alim. y Celda */
+.row2 {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  align-items: end;
+}
+
+/* ==========================================================
+   AUTOCOMPLETE SED
+   ========================================================== */
+.sed-wrap {
+  position: relative;
+}
+
+#sed-input {
+  width: 100%;
+  min-height: 48px;
+  padding: 13px 42px 13px 14px;
+  border: 2px solid var(--gray-b);
+  border-radius: 12px;
+  font-size: 16px;
+  font-family: inherit;
+  color: var(--dark);
+  background: var(--white);
+  outline: none;
+  transition: border-color 0.2s, box-shadow 0.2s;
+  -webkit-appearance: none;
+  touch-action: manipulation;
+}
+
+#sed-input:focus {
+  border-color: var(--orange);
+  box-shadow: 0 0 0 3px rgba(244, 121, 32, 0.12);
+}
+
+/* Botón limpiar SED */
+.sed-clear {
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: var(--gray-b);
+  border: none;
+  border-radius: 50%;
+  width: 32px;
+  height: 32px;
+  font-size: 14px;
+  cursor: pointer;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  color: var(--gray-m);
+  font-weight: 700;
+  touch-action: manipulation;
+}
+
+.sed-clear.visible { display: flex; }
+
+/* Dropdown de resultados */
+#sed-drop {
+  position: absolute;
+  top: calc(100% + 6px);
+  left: 0;
+  right: 0;
+  background: var(--white);
+  border: 2px solid var(--orange);
+  border-radius: 14px;
+  max-height: 240px;
+  overflow-y: auto;
+  z-index: 500;
+  display: none;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+  -webkit-overflow-scrolling: touch;
+}
+
+#sed-drop.open { display: block; }
+
+.sed-opt {
+  padding: 14px 16px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid var(--gray-l);
+  cursor: pointer;
+  min-height: 52px;
+  touch-action: manipulation;
+}
+
+.sed-opt:last-child { border-bottom: none; }
+.sed-opt:active,
+.sed-opt.hi { background: var(--orange-lt); }
+
+.s-id {
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--dark);
+}
+
+.s-alim {
+  font-size: 12px;
+  font-weight: 700;
+  background: var(--orange);
+  color: #fff;
+  padding: 3px 10px;
+  border-radius: 20px;
+}
+
+.sed-empty {
+  padding: 20px;
+  text-align: center;
+  color: var(--gray-m);
+  font-size: 14px;
+}
+
+/* ==========================================================
+   SECCIÓN DE FOTOS
+   ========================================================== */
+.photo-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 8px;
+  margin-top: 4px;
+}
+
+.photo-cell {
+  position: relative;
+  aspect-ratio: 1;
+}
+
+.photo-cell img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 10px;
+  border: 2px solid var(--gray-b);
+}
+
+/* Botón eliminar foto */
+.photo-del {
+  position: absolute;
+  top: 4px;
+  right: 4px;
+  background: rgba(0, 0, 0, 0.65);
+  color: #fff;
+  border: none;
+  border-radius: 50%;
+  width: 30px;
+  height: 30px;
+  font-size: 14px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  touch-action: manipulation;
+}
+
+/* Botón agregar foto */
+.photo-add {
+  aspect-ratio: 1;
+  border: 2.5px dashed var(--orange);
+  border-radius: 10px;
+  background: var(--orange-lt);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  cursor: pointer;
+  color: var(--orange);
+  font-size: 12px;
+  font-weight: 700;
+  touch-action: manipulation;
+}
+
+.photo-add:active { background: #fde4c8; }
+
+.pa-plus {
+  font-size: 30px;
+  line-height: 1;
+  font-weight: 300;
+}
+
+#photo-file { display: none; }
+
+.photo-count {
+  margin-top: 8px;
+  font-size: 12px;
+  color: var(--gray-m);
+  text-align: right;
+}
+
+/* ==========================================================
+   BOTONES DE ACCIÓN
+   ========================================================== */
+.btn-save {
+  width: 100%;
+  min-height: 52px;
+  padding: 15px;
+  background: linear-gradient(135deg, var(--orange) 0%, #E8650A 100%);
+  color: #fff;
+  font-size: 17px;
+  font-weight: 800;
+  border: none;
+  border-radius: 14px;
+  cursor: pointer;
+  box-shadow: 0 6px 18px rgba(244, 121, 32, 0.4);
+  transition: transform 0.1s, opacity 0.15s;
+  letter-spacing: 0.3px;
+  touch-action: manipulation;
+}
+
+.btn-save:active {
+  transform: scale(0.97);
+  opacity: 0.9;
+}
+
+.btn-clear {
+  width: 100%;
+  min-height: 48px;
+  padding: 13px;
+  background: transparent;
+  color: var(--gray-m);
+  font-size: 15px;
+  font-weight: 700;
+  border: 2px solid var(--gray-b);
+  border-radius: 14px;
+  cursor: pointer;
+  margin-top: 10px;
+  touch-action: manipulation;
+}
+
+.btn-clear:active { background: var(--gray-l); }
+
+/* ==========================================================
+   NOTIFICACIÓN TOAST
+   ========================================================== */
+.toast {
+  position: fixed;
+  bottom: calc(24px + env(safe-area-inset-bottom, 0px));
+  left: 50%;
+  transform: translateX(-50%) translateY(20px);
+  background: var(--green);
+  color: #fff;
+  padding: 14px 24px;
+  border-radius: 100px;
+  font-size: 15px;
+  font-weight: 700;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+  opacity: 0;
+  transition: opacity 0.25s, transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+  z-index: 900;
+  white-space: nowrap;
+  pointer-events: none;
+}
+
+.toast.show {
+  opacity: 1;
+  transform: translateX(-50%) translateY(0);
+}
+
+.toast.err { background: var(--red); }
